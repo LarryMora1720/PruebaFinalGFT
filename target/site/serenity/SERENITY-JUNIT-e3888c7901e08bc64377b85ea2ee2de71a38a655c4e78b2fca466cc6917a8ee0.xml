@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="1" name="Yo como usuario quiero crear una Automatización que se encargue de ingresar a la página realizar el diligenciamiento de los" skipped="0" tests="1" time="0.28" timestamp="2025-08-10 08:20:34"><testcase name="registro Utest"><failure message="The page object class demoqa.org.page.DemoQaPage could not be instantiated:&#10;Failed to instantiate page (org.openqa.selenium.InvalidSelectorException: Compound class names not permitted&#10;For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception&#10;Build info: version: '4.21.0', revision: '79ed462ef4'&#10;System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.28'&#10;Driver info: driver.version: unknown)" type="net.thucydides.core.pages.WrongPageError">The page object class demoqa.org.page.DemoQaPage could not be instantiated:
+Failed to instantiate page (org.openqa.selenium.InvalidSelectorException: Compound class names not permitted
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
+Build info: version: '4.21.0', revision: '79ed462ef4'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.28'
+Driver info: driver.version: unknown)</failure><system-err>The page object class demoqa.org.page.DemoQaPage could not be instantiated:
+Failed to instantiate page (org.openqa.selenium.InvalidSelectorException: Compound class names not permitted
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
+Build info: version: '4.21.0', revision: '79ed462ef4'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.28'
+Driver info: driver.version: unknown)&#13;
+</system-err></testcase></testsuite>
