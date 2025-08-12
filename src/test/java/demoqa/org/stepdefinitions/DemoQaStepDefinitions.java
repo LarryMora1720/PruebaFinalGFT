@@ -31,9 +31,9 @@ public class DemoQaStepDefinitions {
         demoQaPage.clickBotonNextLocationYValidarPagina();
     }
 
-    @Then("se valida nueva pantalla del formulario y se continua con el registro del nuevo usuario")
-    public void sevalidanuevapantalladelformularioysecontinuaconelregistrodelnuevousuario() {
-
+    @Then("ingreso al segundo paso del registro limpio el campo City")
+    public void ingresoalsegundopasodelregistrolimpioelcampoCity() {
+        demoQaPage.clickBotonLimpiar();
 
     }
 /*
