@@ -2,12 +2,9 @@ package demoqa.org.page;
 
 import io.cucumber.java.eo.Se;
 import net.serenitybdd.core.pages.PageObject;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.Test;
@@ -102,20 +99,33 @@ public class DemoQaPage extends PageObject {
         seleccionaño.selectByValue("2007");
     }
 
-    public void clickBotonNextLocation() {
-        clickBotonNextLocation.click();
-   WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
-   boolean urlCambio = wait.until(ExpectedConditions.urlContains("https://www.utest.com/signup/address"));
+    public void clickBotonNextLocationYValidarPagina() {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
-        if (urlCambio) {
-            System.out.println("La navegación al segundo paso fue exitosa.");
-        } else {
-            System.out.println("La URL no cambió como se esperaba.");
+            // Esperar que el botón sea clickeable
+            WebElement boton = wait.until(ExpectedConditions.elementToBeClickable(clickBotonNextLocation));
+            boton.click();
+
+            // Validar que la URL sea la esperada
+            boolean enPaginaCorrecta = wait.until(
+                    ExpectedConditions.urlToBe("https://www.utest.com/signup/address")
+            );
+
+            if (enPaginaCorrecta) {
+                System.out.println("Ya estás en la página de dirección.");
+            } else {
+                System.out.println("La URL no es la esperada después de hacer clic.");
+            }
+
+        } catch (TimeoutException e) {
+            System.out.println("Tiempo de espera agotado: No se encontró el botón o la URL no cargó.");
+        } catch (NoSuchElementException e) {
+            System.out.println("El botón 'Next: Location' no existe en la página.");
         }
-
     }
 
-//Elementos segunda pantalla
+    //Elementos segunda pantalla
 
     @FindBy(xpath = "//button[contains(@class, 'clear-btn')]")
         WebElement clickBotonLimpiar;

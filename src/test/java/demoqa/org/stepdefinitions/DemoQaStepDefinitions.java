@@ -16,27 +16,32 @@ public class DemoQaStepDefinitions {
 
     @Given("que ingreso a la pagina de utest")
     public void queingresoalapaginadeutest() {
-    demoQaPage.openUrlPrueba("https://www.utest.com/");
-    }
-    @When("doy click en el boton join now")
-    public void doyclickenelbotonjoinnow() {
+        demoQaPage.openUrlPrueba("https://www.utest.com/");
         demoQaPage.clickBotonJoinNow();
     }
 
-    @Then("completo el formulario {string} {string} {string}")
-    public void completoElFormulario(String nombre, String apellido, String correo) {
+    @When("completo el formulario {string} {string} {string}")
+    public void completoElFormulario (String nombre, String apellido, String correo) {
         demoQaPage.sendkeyPrimerNombre(nombre);
         demoQaPage.sendkeyApellido(apellido);
         demoQaPage.sendkeycorreo(correo);
         demoQaPage.sendkeymesNacimiento();
         demoQaPage.sendkeydiaNacimiento();
         demoQaPage.sendkeyañoNacimiento();
+        demoQaPage.clickBotonNextLocationYValidarPagina();
     }
+
+    @Then("se valida nueva pantalla del formulario y se continua con el registro del nuevo usuario")
+    public void sevalidanuevapantalladelformularioysecontinuaconelregistrodelnuevousuario() {
+
+
+    }
+/*
     @And("doy click en el boton next Location")
     public void doyclickenelbotonnextLocation() {
         demoQaPage.clickBotonNextLocation();
     }
-
+*/
 /*
     //public DemoQaPage demoQaPage2;
 

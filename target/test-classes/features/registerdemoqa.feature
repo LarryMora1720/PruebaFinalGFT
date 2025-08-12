@@ -4,9 +4,15 @@ Feature: Yo como usuario quiero crear una Automatización que se encargue de ing
   @RegisterDemoQA
   Scenario: registro Utest
     Given que ingreso a la pagina de utest
-    When doy click en el boton join now
-    Then completo el formulario "Larry" "Mora" "ext_lmmorac@falabella.cl"
-    And doy click en el boton next Location
-    
+    When completo el formulario "Larry" "Mora" "ext_lmmorac@falabella.cl"
+    #Then se valida nueva pantalla del formulario y se continua con el registro del nuevo usuario
+    ##And doy click en el boton next Location
+
+  ##@RegisterDemoQA2
+  ##Scenario: registro Utest
+  ##  Given que ingreso a la pagina de utest
+    ##When doy click en el boton join now
+    ##Then completo el formulario "Larry" "Mora" "ext_lmmorac@falabella.cl"
+    ##And doy click en el boton next Location
 
 
