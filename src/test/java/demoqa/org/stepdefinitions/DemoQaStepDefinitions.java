@@ -32,10 +32,32 @@ public class DemoQaStepDefinitions {
         demoQaPage.sendkeydiaNacimiento();
         demoQaPage.sendkeyañoNacimiento();
     }
-
-
     @And("doy click en el boton next Location")
     public void doyclickenelbotonnextLocation() {
-       demoQaPage.clickBotonNextLocation();
+        demoQaPage.clickBotonNextLocation();
     }
+
+/*
+    //public DemoQaPage demoQaPage2;
+
+    @And("que ingreso al segundo paso del registro limpio el campo City")
+    public void queingresoalsegundopasodelregistrolimpioelcampoCity() {
+        demoQaPage.clickBotonLimpiar();
+    }
+
+    @And("completo los campos {string} {string} y Contry")
+    public void completoloscamposCityPostalCodeyCountry(String City, String postalCode) {
+        demoQaPage.sendkeyCiudad(City);
+        demoQaPage.sendkeyPostalCode(postalCode);
+        demoQaPage.sendkeyCountry();
+    }
+
+    @And("doy click en el boton next Divices")
+    public void doyclickenelbotonnextDivices() {
+        demoQaPage.clickBotonNextDivices();
+
+    }
+
+*/
+
 }

@@ -7,3 +7,6 @@ Feature: Yo como usuario quiero crear una Automatización que se encargue de ing
     When doy click en el boton join now
     Then completo el formulario "Larry" "Mora" "ext_lmmorac@falabella.cl"
     And doy click en el boton next Location
+
+
+

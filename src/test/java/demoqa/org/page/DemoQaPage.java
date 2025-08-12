@@ -1,5 +1,6 @@
 package demoqa.org.page;
 
+import io.cucumber.java.eo.Se;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.time.Duration;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,6 +25,7 @@ import org.openqa.selenium.WebDriver;
 
 public class DemoQaPage extends PageObject {
 
+    //Elementos primera pantalla
     @FindBy(className = "unauthenticated-nav-bar__sign-up")
     WebElement botonLogin;
 
@@ -43,13 +46,11 @@ public class DemoQaPage extends PageObject {
 
     @FindBy(id = "birthYear")
     WebElement añoNacimiento;
-
-    /*
+/*
     @FindBy(xpath = "//button[contains(@class, 'btn btn-blue')]")
     WebElement clickBotonNextLocation;
-    */
-
-    @FindBy(className = "material-icons")
+*/
+    @FindBy(xpath = "//button[span[text()='Next: Location']]")
     WebElement clickBotonNextLocation;
 
     public void openUrlPrueba(String url) {
@@ -84,7 +85,7 @@ public class DemoQaPage extends PageObject {
         selecionMes.selectByIndex(1);
         // El índice comienza en 0// Seleccionar un valor por índice (por ejemplo, seleccionar el segundo elemento)
 
-        }
+    }
 
     public void sendkeydiaNacimiento() {
 
@@ -100,11 +101,65 @@ public class DemoQaPage extends PageObject {
         //select.selectByIndex(6);//Se escoge por posición en la lista
         seleccionaño.selectByValue("2007");
     }
-public void clickBotonNextLocation() {
+
+    public void clickBotonNextLocation() {
         clickBotonNextLocation.click();
-}
+   WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+   boolean urlCambio = wait.until(ExpectedConditions.urlContains("https://www.utest.com/signup/address"));
+
+        if (urlCambio) {
+            System.out.println("La navegación al segundo paso fue exitosa.");
+        } else {
+            System.out.println("La URL no cambió como se esperaba.");
+        }
 
     }
+
+//Elementos segunda pantalla
+
+    @FindBy(xpath = "//button[contains(@class, 'clear-btn')]")
+        WebElement clickBotonLimpiar;
+
+    @FindBy(xpath = "//button[contains(@class, 'clear-btn')]")//corregir
+    WebElement ciudad;
+
+    @FindBy(id = "zip")
+    WebElement codPostal;
+
+    @FindBy(id = "countryId")
+    WebElement country;
+
+    @FindBy(xpath = "//button[contains(@class,'btn btn-blue')]")
+    WebElement nextDivices;
+
+    public void clickBotonLimpiar() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(clickBotonLimpiar));
+        clickBotonLimpiar.click();
+    }
+
+    public void sendkeyCiudad(String City) {
+        ciudad.sendKeys(City);
+    }
+
+    public void sendkeyPostalCode(String postalCode) {
+        codPostal.sendKeys(postalCode);
+    }
+
+    public void sendkeyCountry() {
+        WebElement listaDesplegableCountry = getDriver().findElement(By.id("countryId"));
+        Select seleccionCountry = new Select(listaDesplegableCountry);
+        //Se escoge por posición en la lista
+        seleccionCountry.selectByIndex(5);
+
+    }
+
+    public void clickBotonNextDivices() {
+        nextDivices.click();
+    }
+}
+
+
 
 
 
