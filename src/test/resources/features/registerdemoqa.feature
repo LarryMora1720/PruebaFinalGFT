@@ -5,7 +5,7 @@ Feature: Yo como usuario quiero crear una Automatización que se encargue de ing
   Scenario: registro Utest
     Given que ingreso a la pagina de utest
     When completo el formulario "Larry" "Mora" "ext_lmmorac@falabella.cl"
-    Then ingreso al segundo paso del registro limpio el campo City
+    Then ingreso al segundo paso y completo el formulario "Bogotá" "Bogotá, Bogota, Colombia" "119192" y Country
     ##And doy click en el boton next Location
 
 

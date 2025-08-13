@@ -10,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -130,7 +132,7 @@ public class DemoQaPage extends PageObject {
     @FindBy(xpath = "//button[contains(@class, 'clear-btn')]")
         WebElement clickBotonLimpiar;
 
-    @FindBy(xpath = "//button[contains(@class, 'clear-btn')]")//corregir
+    @FindBy(xpath = "//button[contains(@class, 'clear-btn')]")
     WebElement ciudad;
 
     @FindBy(id = "zip")
@@ -139,8 +141,11 @@ public class DemoQaPage extends PageObject {
     @FindBy(id = "countryId")
     WebElement country;
 
-    @FindBy(xpath = "//button[contains(@class,'btn btn-blue')]")
+    @FindBy(xpath = "//button[span[text()='Next: Devices']]")
     WebElement nextDivices;
+
+    By listaCity = By.cssSelector("input[type='search']");
+    By opcionDelaLista = By.cssSelector("ngf-option .option");
 
     public void clickBotonLimpiar() {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
@@ -148,8 +153,26 @@ public class DemoQaPage extends PageObject {
         clickBotonLimpiar.click();
     }
 
-    public void sendkeyCiudad(String City) {
-        ciudad.sendKeys(City);
+       public void sendkeyCiudad(String textoBusqueda, String opcionDeseada) {
+           WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+
+           // Localizar el input por tipo search
+           WebElement input = wait.until(ExpectedConditions.elementToBeClickable(listaCity));
+           input.clear();
+           input.sendKeys(textoBusqueda);
+
+           // Esperar que la lista de opciones aparezca
+           List<WebElement> opciones = wait.until(
+                   ExpectedConditions.visibilityOfAllElementsLocatedBy(opcionDelaLista));// <-- aquí va la clase real de las opciones
+
+
+           for (WebElement opcion : opciones) {
+               if (opcion.getText().trim().equals("Bogotá, Bogota, Colombia")) {
+                   opcion.click();
+                   break;
+               }
+           }
+
     }
 
     public void sendkeyPostalCode(String postalCode) {

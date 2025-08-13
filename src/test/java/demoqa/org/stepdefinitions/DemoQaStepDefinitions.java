@@ -31,9 +31,14 @@ public class DemoQaStepDefinitions {
         demoQaPage.clickBotonNextLocationYValidarPagina();
     }
 
-    @Then("ingreso al segundo paso del registro limpio el campo City")
-    public void ingresoalsegundopasodelregistrolimpioelcampoCity() {
+    @Then("ingreso al segundo paso y completo el formulario {string} {string} {string} y Country")
+    public void ingresoalsegundopasoycompletoelformularioyCountry(String textoBusqueda, String opcionDeseada, String postalCode) {
         demoQaPage.clickBotonLimpiar();
+        demoQaPage.sendkeyCiudad(textoBusqueda, opcionDeseada);
+        demoQaPage.sendkeyPostalCode(postalCode);
+        demoQaPage.sendkeyCountry();
+        demoQaPage.clickBotonNextDivices();
+
 
     }
 /*
