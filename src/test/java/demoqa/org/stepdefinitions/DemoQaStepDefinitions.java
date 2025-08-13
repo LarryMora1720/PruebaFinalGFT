@@ -38,15 +38,25 @@ public class DemoQaStepDefinitions {
         demoQaPage.sendkeyPostalCode(postalCode);
         demoQaPage.sendkeyCountry();
         demoQaPage.clickBotonNextDivices();
+    }
+    /*
+        @Then("ingreso al segundo paso y completo el formulario {string} {string} {string} {string} y Country")
+        public void ingresoalsegundopasoycompletoelformularioyCountry(String textoBusqueda, String opcionDeseada, String postalCode,String valorBusqueda) {
+            demoQaPage.clickBotonLimpiar();
+            demoQaPage.sendkeyCiudad(textoBusqueda, opcionDeseada);
+            demoQaPage.sendkeyPostalCode(postalCode);
+            demoQaPage.sendkeyCountry();
+            demoQaPage.clickBotonNextDivices();
+            demoQaPage.listaSistemaOperativo();
+            demoQaPage.clickEligeSistemaOperativo(valorBusqueda);
 
 
+    */
+    @And("ingreso al tercer paso y completo informacion de los dispositivos")
+    public void ingresoaltercerpasoycompletoinformaciondelosdispositivos() {
+        demoQaPage.listaSistemaOperativo();
     }
-/*
-    @And("doy click en el boton next Location")
-    public void doyclickenelbotonnextLocation() {
-        demoQaPage.clickBotonNextLocation();
-    }
-*/
+
 /*
     //public DemoQaPage demoQaPage2;
 

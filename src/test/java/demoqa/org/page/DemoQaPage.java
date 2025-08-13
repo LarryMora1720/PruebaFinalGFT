@@ -45,10 +45,10 @@ public class DemoQaPage extends PageObject {
 
     @FindBy(id = "birthYear")
     WebElement añoNacimiento;
-/*
-    @FindBy(xpath = "//button[contains(@class, 'btn btn-blue')]")
-    WebElement clickBotonNextLocation;
-*/
+    /*
+        @FindBy(xpath = "//button[contains(@class, 'btn btn-blue')]")
+        WebElement clickBotonNextLocation;
+    */
     @FindBy(xpath = "//button[span[text()='Next: Location']]")
     WebElement clickBotonNextLocation;
 
@@ -103,14 +103,16 @@ public class DemoQaPage extends PageObject {
 
     public void clickBotonNextLocationYValidarPagina() {
         try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
-
-            // Esperar que el botón sea clickeable
-            WebElement boton = wait.until(ExpectedConditions.elementToBeClickable(clickBotonNextLocation));
+            // Espera para el botón
+            WebDriverWait waitBoton = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+            WebElement boton = waitBoton.until(
+                    ExpectedConditions.elementToBeClickable(clickBotonNextLocation)
+            );
             boton.click();
 
-            // Validar que la URL sea la esperada
-            boolean enPaginaCorrecta = wait.until(
+            // Espera para la URL
+            WebDriverWait waitUrl = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+            boolean enPaginaCorrecta = waitUrl.until(
                     ExpectedConditions.urlToBe("https://www.utest.com/signup/address")
             );
 
@@ -127,13 +129,16 @@ public class DemoQaPage extends PageObject {
         }
     }
 
-    //Elementos segunda pantalla
+    //Elementos segunda pantalla del registro
 
     @FindBy(xpath = "//button[contains(@class, 'clear-btn')]")
-        WebElement clickBotonLimpiar;
+    WebElement clickBotonLimpiar;
 
     @FindBy(xpath = "//button[contains(@class, 'clear-btn')]")
     WebElement ciudad;
+
+    By listaCity = By.cssSelector("input[type='search']");
+    By opcionDelaLista = By.cssSelector("ngf-option .option");
 
     @FindBy(id = "zip")
     WebElement codPostal;
@@ -142,40 +147,52 @@ public class DemoQaPage extends PageObject {
     WebElement country;
 
     @FindBy(xpath = "//button[span[text()='Next: Devices']]")
-    WebElement nextDivices;
-
-    By listaCity = By.cssSelector("input[type='search']");
-    By opcionDelaLista = By.cssSelector("ngf-option .option");
+    WebElement clickBotonNextDivices;
 
     public void clickBotonLimpiar() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(clickBotonLimpiar));
-        clickBotonLimpiar.click();
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+
+            // Esperar que el WebElement sea visible y clickeable
+            wait.until(ExpectedConditions.visibilityOf(clickBotonLimpiar));
+            wait.until(ExpectedConditions.elementToBeClickable(clickBotonLimpiar));
+
+            clickBotonLimpiar.click();
+            System.out.println("Botón 'Limpiar' clickeado correctamente.");
+
+        } catch (TimeoutException e) {
+            System.out.println("Tiempo agotado: El botón 'Limpiar' no estuvo listo.");
+        } catch (NoSuchElementException e) {
+            System.out.println("El botón 'Limpiar' no existe en la página.");
+        }
     }
 
-       public void sendkeyCiudad(String textoBusqueda, String opcionDeseada) {
-           WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+    public void sendkeyCiudad(String textoBusqueda, String opcionDeseada) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
-           // Localizar el input por tipo search
-           WebElement input = wait.until(ExpectedConditions.elementToBeClickable(listaCity));
-           input.clear();
-           input.sendKeys(textoBusqueda);
+        // Localizar el input por tipo search
+        WebElement input = wait.until(ExpectedConditions.elementToBeClickable(listaCity));
+        input.clear();
+        input.sendKeys(textoBusqueda);
 
-           // Esperar que la lista de opciones aparezca
-           List<WebElement> opciones = wait.until(
-                   ExpectedConditions.visibilityOfAllElementsLocatedBy(opcionDelaLista));// <-- aquí va la clase real de las opciones
+        List<WebElement> opciones = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(opcionDelaLista, 0));
+
+        // Esperar que la lista de opciones aparezca
+        List<WebElement> elemento = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(opcionDelaLista));// <-- aquí va la clase real de las opciones
 
 
-           for (WebElement opcion : opciones) {
-               if (opcion.getText().trim().equals("Bogotá, Bogota, Colombia")) {
-                   opcion.click();
-                   break;
-               }
-           }
+        for (WebElement opcion : opciones) {
+            if (opcion.getText().trim().equals("Bogotá, Bogota, Colombia")) {
+                opcion.click();
+                break;
+            }
+        }
 
     }
 
     public void sendkeyPostalCode(String postalCode) {
+        //WebDriverWait waitBoton = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         codPostal.sendKeys(postalCode);
     }
 
@@ -188,9 +205,101 @@ public class DemoQaPage extends PageObject {
     }
 
     public void clickBotonNextDivices() {
-        nextDivices.click();
+        try {
+            // Espera para el botón
+            WebDriverWait waitBoton = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+            WebElement boton = waitBoton.until(
+                    ExpectedConditions.elementToBeClickable(clickBotonNextDivices)
+            );
+            boton.click();
+
+            // Espera para la URL
+            WebDriverWait waitUrl = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+            boolean enPaginaCorrecta = waitUrl.until(
+                    ExpectedConditions.urlToBe("https://www.utest.com/signup/devices")
+            );
+
+            if (enPaginaCorrecta) {
+                System.out.println("Ya estás en la página de dirección.");
+            } else {
+                System.out.println("La URL no es la esperada después de hacer clic.");
+            }
+
+        } catch (TimeoutException e) {
+            System.out.println("Tiempo de espera agotado: No se encontró el botón o la URL no cargó.");
+        } catch (NoSuchElementException e) {
+            System.out.println("El botón 'Next: Location' no existe en la página.");
+        }
     }
-}
+
+    //Elementos tercera pantalla del registro
+
+    By clickUcomputer = By.xpath("//span[@aria-label='Select OS'][.//button[@aria-label='Clear Computer OS selection']]");
+    By clickSoPc = By.xpath("//div[@ng-bind-html='device.name | highlight: $select.search' and normalize-space(.)='Windows']");
+   // By clickSoMobile = By.xpath("//span[@aria-label='Select OS'][.//button[@aria-label='Clear Mobile OS selection']]");//segundo campo de Sistema operativo
+
+    public void listaSistemaOperativo() {
+        try {
+            // Espera y clic para abrir la lista
+            WebDriverWait waitBoton = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+            WebElement boton = waitBoton.until(
+                    ExpectedConditions.elementToBeClickable(clickUcomputer)
+            );
+            boton.click();
+            System.out.println("Botón 'lista computer' clickeado correctamente.");
+
+        } catch (TimeoutException e) {
+            System.out.println("Tiempo agotado: El botón 'computer' no estuvo listo.");
+            return;
+        } catch (NoSuchElementException e) {
+            System.out.println("El botón 'computer' no existe en la página.");
+            return;
+        }
+
+        try {
+            // Espera y clic para seleccionar Windows
+            WebDriverWait waitListaSoPC = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+            WebElement opcionWindows = waitListaSoPC.until(
+                    ExpectedConditions.elementToBeClickable(clickSoPc)
+            );
+            opcionWindows.click();
+            System.out.println("'Windows' seleccionado correctamente.");
+        } catch (TimeoutException e) {
+            System.out.println("Tiempo agotado: La opción 'Windows' no estuvo disponible.");
+        }
+    }
+
+    }
+/*
+    public void clickEligeSistemaOperativo(String valorBusqueda) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+
+        // Esperar que las opciones estén visibles
+        List<WebElement> opcionesSo = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                        By.cssSelector("div[ng-bind-html*='device.name']")
+                )
+        );
+
+        boolean encontrado = false;
+        for (WebElement opcion : opcionesSo) {
+            if (opcion.getText().trim().equalsIgnoreCase(valorBusqueda)) {
+                opcion.click();
+                encontrado = true;
+                System.out.println("✅ Dispositivo seleccionado: " + valorBusqueda);
+                break;
+            }
+        }
+
+    }
+
+ */
+
+
+
+
+
+
 
 
 
