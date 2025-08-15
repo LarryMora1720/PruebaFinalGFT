@@ -236,7 +236,7 @@ public class DemoQaPage extends PageObject {
 
     By clickUcomputer = By.xpath("//span[@aria-label='Select OS'][.//button[@aria-label='Clear Computer OS selection']]");
     By clickSoPc = By.xpath("//div[@ng-bind-html='device.name | highlight: $select.search' and normalize-space(.)='Windows']");
-   // By clickSoMobile = By.xpath("//span[@aria-label='Select OS'][.//button[@aria-label='Clear Mobile OS selection']]");//segundo campo de Sistema operativo
+    // By clickSoMobile = By.xpath("//span[@aria-label='Select OS'][.//button[@aria-label='Clear Mobile OS selection']]");//segundo campo de Sistema operativo
 
     public void listaSistemaOperativo() {
         try {
@@ -269,7 +269,7 @@ public class DemoQaPage extends PageObject {
         }
     }
 
-    }
+}
 /*
     public void clickEligeSistemaOperativo(String valorBusqueda) {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
@@ -294,18 +294,3 @@ public class DemoQaPage extends PageObject {
     }
 
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
