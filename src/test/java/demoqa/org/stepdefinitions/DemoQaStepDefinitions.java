@@ -1,6 +1,9 @@
 package demoqa.org.stepdefinitions;
 
-import demoqa.org.page.DemoQaPage;
+import demoqa.org.page.PaginaPrincipal;
+import demoqa.org.page.PrimerFormulario;
+import demoqa.org.page.SegundoFormulario;
+import demoqa.org.page.TercerFormulario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,32 +15,36 @@ public class DemoQaStepDefinitions {
     @Managed
     WebDriver driver;
 
-    public DemoQaPage demoQaPage;
+    public PaginaPrincipal paginaPrincipal;
+    public PrimerFormulario primerFormulario;
+    public SegundoFormulario segundoFormulario;
+    public TercerFormulario tercerFormulario;
 
     @Given("que ingreso a la pagina de utest")
     public void queingresoalapaginadeutest() {
-        demoQaPage.openUrlPrueba("https://www.utest.com/");
-        demoQaPage.clickBotonJoinNow();
+        paginaPrincipal.openUrlPrueba("https://www.utest.com/");
+        paginaPrincipal.clickBotonJoinNow();
     }
+
 
     @When("completo el formulario {string} {string} {string}")
     public void completoElFormulario (String nombre, String apellido, String correo) {
-        demoQaPage.sendkeyPrimerNombre(nombre);
-        demoQaPage.sendkeyApellido(apellido);
-        demoQaPage.sendkeycorreo(correo);
-        demoQaPage.sendkeymesNacimiento();
-        demoQaPage.sendkeydiaNacimiento();
-        demoQaPage.sendkeyañoNacimiento();
-        demoQaPage.clickBotonNextLocationYValidarPagina();
+        primerFormulario.sendkeyPrimerNombre(nombre);
+        primerFormulario.sendkeyApellido(apellido);
+        primerFormulario.sendkeycorreo(correo);
+        primerFormulario.sendkeymesNacimiento();
+        primerFormulario.sendkeydiaNacimiento();
+        primerFormulario.sendkeyañoNacimiento();
+        primerFormulario.clickBotonNextLocationYValidarPagina();
     }
 
     @Then("ingreso al segundo paso y completo el formulario {string} {string} {string} y Country")
-    public void ingresoalsegundopasoycompletoelformularioyCountry(String textoBusqueda, String opcionDeseada, String postalCode) {
-        demoQaPage.clickBotonLimpiar();
-        demoQaPage.sendkeyCiudad(textoBusqueda, opcionDeseada);
-        demoQaPage.sendkeyPostalCode(postalCode);
-        demoQaPage.sendkeyCountry();
-        demoQaPage.clickBotonNextDivices();
+    public void ingresoalsegundopasoycompletoelformularioyCountry(String textoBusqueda, String opcionDeseada, String postalCode) throws InterruptedException {
+        segundoFormulario.clickBotonLimpiar();
+        segundoFormulario.sendkeyCiudad(textoBusqueda, opcionDeseada);
+        segundoFormulario.sendkeyPostalCode(postalCode);
+        segundoFormulario.sendkeyCountry();
+        segundoFormulario.clickBotonNextDivices();
     }
     /*
         @Then("ingreso al segundo paso y completo el formulario {string} {string} {string} {string} y Country")
@@ -54,7 +61,7 @@ public class DemoQaStepDefinitions {
     */
     @And("ingreso al tercer paso y completo informacion de los dispositivos")
     public void ingresoaltercerpasoycompletoinformaciondelosdispositivos() {
-        demoQaPage.listaSistemaOperativo();
+        tercerFormulario.listaSistemaOperativo();
     }
 
 /*
