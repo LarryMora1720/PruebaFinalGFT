@@ -4,9 +4,7 @@ Feature: Yo como usuario quiero crear una Automatización que se encargue de ing
   @RegisterDemoQA
   Scenario: Registro de nuevo usuario en la pagina Utest
     Given que ingreso a la pagina de utest
-    When completo el formulario "Larry" "Mora" "ext_lmmorac@falabella.cl"
+    When completo el formulario "Larry" "Mora" "ext_lmmorac@falabellla.cl"
     Then ingreso al segundo paso y completo el formulario "Bogotá" "Bogotá, Bogota, Colombia" "99999" y Country
     And ingreso al tercer paso y completo informacion de los dispositivos
-    ##And doy click en el boton next Location
-
-
+    And creo la nueva "PruebaTest@1234.*" para finalizar con el registro en Utest

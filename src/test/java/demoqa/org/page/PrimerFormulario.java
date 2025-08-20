@@ -87,6 +87,7 @@ public class PrimerFormulario extends PaginaPrincipal {
             WebElement boton = waitBoton.until(
                     ExpectedConditions.elementToBeClickable(clickBotonNextLocation)
             );
+            Thread.sleep(2000);
             boton.click();
 
             // Espera para la URL
@@ -105,6 +106,8 @@ public class PrimerFormulario extends PaginaPrincipal {
             System.out.println("Tiempo de espera agotado: No se encontró el botón o la URL no cargó.");
         } catch (NoSuchElementException e) {
             System.out.println("El botón 'Next: Location' no existe en la página.");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

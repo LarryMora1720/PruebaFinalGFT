@@ -48,7 +48,39 @@ public class SegundoFormulario extends PaginaPrincipal {
         }
     }
 
-    public void sendkeyCiudad(String textoBusqueda, String opcionDeseada) {
+    public void sendkeyCiudad(String textoBusqueda, String opcionDeseada) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(listaCity));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(listaCity));
+            WebElement input = wait.until(ExpectedConditions.elementToBeClickable(listaCity));
+            input.clear();
+            input.sendKeys(textoBusqueda);
+
+            wait.until(ExpectedConditions.presenceOfElementLocated(opcionDelaLista));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(opcionDelaLista));
+            WebElement opcion = wait.until(ExpectedConditions.elementToBeClickable(opcionDelaLista));
+            List<WebElement> opciones = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(opcionDelaLista));
+            Thread.sleep(2000);
+
+            for (WebElement opcionCity : opciones) {
+                if (opcion.getText().trim().equalsIgnoreCase(opcionDeseada)) {
+                    opcion.click();
+                    return;
+                }
+            }
+
+            throw new NoSuchElementException("La opción '" + opcionDeseada + "' no fue encontrada.");
+
+        } catch (TimeoutException | InterruptedException e) {
+            System.out.println("No se encontró el campo de ciudad o las opciones en el tiempo esperado.");
+            throw e;
+        }
+    }
+
+
+    /*   public void sendkeyCiudad(String textoBusqueda, String opcionDeseada) {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
         // Localizar el input por tipo search
@@ -71,8 +103,7 @@ public class SegundoFormulario extends PaginaPrincipal {
         }
 
     }
-
-
+  */
     public void sendkeyPostalCode(String postalCode) throws InterruptedException {
         //WebDriverWait waitBoton = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         Thread.sleep(2000);

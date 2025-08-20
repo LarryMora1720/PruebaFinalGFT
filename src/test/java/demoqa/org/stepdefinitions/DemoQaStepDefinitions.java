@@ -1,9 +1,6 @@
 package demoqa.org.stepdefinitions;
 
-import demoqa.org.page.PaginaPrincipal;
-import demoqa.org.page.PrimerFormulario;
-import demoqa.org.page.SegundoFormulario;
-import demoqa.org.page.TercerFormulario;
+import demoqa.org.page.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,6 +16,7 @@ public class DemoQaStepDefinitions {
     public PrimerFormulario primerFormulario;
     public SegundoFormulario segundoFormulario;
     public TercerFormulario tercerFormulario;
+    public UltimoFormulario ultimoFormulario;
 
     @Given("que ingreso a la pagina de utest")
     public void queingresoalapaginadeutest() {
@@ -28,7 +26,7 @@ public class DemoQaStepDefinitions {
 
 
     @When("completo el formulario {string} {string} {string}")
-    public void completoElFormulario (String nombre, String apellido, String correo) {
+    public void completoElFormulario(String nombre, String apellido, String correo) {
         primerFormulario.sendkeyPrimerNombre(nombre);
         primerFormulario.sendkeyApellido(apellido);
         primerFormulario.sendkeycorreo(correo);
@@ -46,45 +44,22 @@ public class DemoQaStepDefinitions {
         segundoFormulario.sendkeyCountry();
         segundoFormulario.clickBotonNextDivices();
     }
-    /*
-        @Then("ingreso al segundo paso y completo el formulario {string} {string} {string} {string} y Country")
-        public void ingresoalsegundopasoycompletoelformularioyCountry(String textoBusqueda, String opcionDeseada, String postalCode,String valorBusqueda) {
-            demoQaPage.clickBotonLimpiar();
-            demoQaPage.sendkeyCiudad(textoBusqueda, opcionDeseada);
-            demoQaPage.sendkeyPostalCode(postalCode);
-            demoQaPage.sendkeyCountry();
-            demoQaPage.clickBotonNextDivices();
-            demoQaPage.listaSistemaOperativo();
-            demoQaPage.clickEligeSistemaOperativo(valorBusqueda);
 
-
-    */
     @And("ingreso al tercer paso y completo informacion de los dispositivos")
     public void ingresoaltercerpasoycompletoinformaciondelosdispositivos() {
-        tercerFormulario.listaSistemaOperativo();
+        tercerFormulario.listaSistemaOperativoPc();
+        tercerFormulario.listaVersion();
+        tercerFormulario.clickLanguage();
+        tercerFormulario.clickUMobileDivice();
+        tercerFormulario.clickModel();
+        tercerFormulario.clicksystem();
     }
 
-/*
-    //public DemoQaPage demoQaPage2;
-
-    @And("que ingreso al segundo paso del registro limpio el campo City")
-    public void queingresoalsegundopasodelregistrolimpioelcampoCity() {
-        demoQaPage.clickBotonLimpiar();
+    @And("creo la nueva {string} para finalizar con el registro en Utest")
+    public void creolanuevacontraseñaparafinalizarconelregistroenUtest(String contraseña) {
+        ultimoFormulario.finalizacionRegistro(contraseña);
+        ultimoFormulario.registroOk();
     }
 
-    @And("completo los campos {string} {string} y Contry")
-    public void completoloscamposCityPostalCodeyCountry(String City, String postalCode) {
-        demoQaPage.sendkeyCiudad(City);
-        demoQaPage.sendkeyPostalCode(postalCode);
-        demoQaPage.sendkeyCountry();
-    }
-
-    @And("doy click en el boton next Divices")
-    public void doyclickenelbotonnextDivices() {
-        demoQaPage.clickBotonNextDivices();
-
-    }
-
-*/
 
 }
