@@ -1,0 +1,74 @@
+# Archivos de compilación y directorios de Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Archivos de logs
+*.log
+
+# Archivos de configuración locales
+*.iml
+.idea/
+*.ipr
+*.iws
+*.classpath
+*.project
+.settings/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Reportes de Serenity
+/target/site/
+
+# Archivos generados por Serenity
+.serenity/
+
+# Resultados de pruebas
+*.json
+*.html
+*.xml
+*.txt
+*.ser
+
+# Eclipse
+/.metadata/
+/bin/
+/tmp/
+/*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+
+# IntelliJ IDEA
+*.idea/
+*.idea_modules/
+*.iml
+
+# Archivos personales o sensibles
+.env
+*.key
+*.pem
+*.crt
+
+# Archivos temporales o de sistema
+*.tmp
+*.log
+*.bak
+*.swp
+*.swo
+*.orig
+
+# VS Code
+.vscode/
+
+# OS-specific
+ehthumbs.db
+Icon?
+desktop.ini
+
+# MacOS
+**/.DS_Store
+**/.AppleDouble
+**/.LSOverride
